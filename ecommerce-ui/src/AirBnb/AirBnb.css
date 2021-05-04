@@ -1,0 +1,24 @@
+  .host{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .homepage-child {
+    flex: 4
+  }
+  .shopping-cart-child {
+    flex: 4
+  }
+  .host-child {
+    flex: 4
+  }
+  .locations-gallery{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    flex-wrap: wrap;
+  }
+  .img {
+    max-width: 100%;
+    height: auto;
+  }

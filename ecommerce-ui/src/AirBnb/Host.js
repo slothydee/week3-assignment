@@ -12,15 +12,13 @@ class Host extends Component {
     }
 
     render() {
+        const {host} = this.props;
         return (
         <div className="host">
             <div className="host">
-                    <div className='article-child'>
-                        <h4>{this.props.author.name}</h4>
+                    <div className='host-child'>
+                        <h4>Host: {host.name} {this._renderHostIcon()}</h4>
                     </div>
-                        <div className='article-child'>
-                        _renderHostIcon()
-                        </div>
             </div>  
         </div>
         )
@@ -28,16 +26,12 @@ class Host extends Component {
     _renderHostIcon = () => {
         if (this.props.host.isSuperhost) {
             return (
-                <div className='article-child'>
-                <FontAwesomeIcon icon={faUserCircle} className="fa-is-host"/>
-                </div>
+                <FontAwesomeIcon icon={faUserCircle} color={'rgb(49, 150, 36)'} title='superhost'/> 
             )
             }
         else {
             return (
-                <div className='article-child'>
                 <FontAwesomeIcon icon={faUserCircle} className="fa-is-not-superhost"/>
-                </div>
             )
         }
     }
