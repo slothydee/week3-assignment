@@ -13,21 +13,28 @@ class AirBnbHomePage extends Component {
     onSubmit = (e) => {
         const currShoppingCartItems = this.state.shoppingCartItems
         const clickedTitle = e.target.value
-        const clickedItem = {'inShoppingCart': true, 'title': clickedTitle}
 
-        if(currShoppingCartItems.filter(element => (element.title === clickedTitle)).length === 0){
+        if(currShoppingCartItems.filter(element => (element === clickedTitle)).length === 0){
             this.setState({
-                shoppingCartItems: [...this.state.shoppingCartItems, clickedItem],
+                shoppingCartItems: [...this.state.shoppingCartItems, clickedTitle],
             });
         }
-        console.log(currShoppingCartItems)
     }
 
     onRemove = (e) => {
-        const item = {'title': e.target.value, 'inShoppingCart': false}
-        this.setState({
-            shoppingCartItems: [...this.state.shoppingCartItems, item],
-        });
+        const clickedItem = e.target.value
+        const currShoppingCartItems = this.state.shoppingCartItems
+        for( let i = 0; i < currShoppingCartItems.length; i++){ 
+            if ( currShoppingCartItems[i] === clickedItem) { 
+        
+                currShoppingCartItems.splice(i, 1); 
+                this.setState({
+                    shoppingCartItems: currShoppingCartItems
+                })
+            }
+        
+        }
+        
     }
 
     render() {
@@ -47,24 +54,24 @@ class AirBnbHomePage extends Component {
                 {rentals}
                 </div>
             </div>
+            <div>
+            <h1>Current Reservations</h1>
             <div className="locations-gallery">{this._renderShoppingCart()}</div>
+            </div>
             </div>
         )
     }
 
     _renderShoppingCart= () => {
         const currShoppingCartItems = this.state.shoppingCartItems
-        // return currShoppingCartItems.map((item) => {
-        //     return (
-        //         <div>
-        //             <h1>Current Reservations</h1>
-        //         <div className="shopping-cart-child" key={item.title + 'ShoppingCart'}>
-        //             <p>{item.title}</p>
-        //             <button onClick={this.onRemove} value={item.title}>Remove</button>
-        //         </div>
-        //         </div>
-        //         )
-        // })
+        return currShoppingCartItems.map((item) => {
+                return (  
+                    <div className="shopping-cart-child" key={item + 'ShoppingCart'}>
+                        <p>{item}</p>
+                        <button onClick={this.onRemove} value={item}>Remove</button>
+                    </div>
+                    )
+        })
     }
 }
 export default AirBnbHomePage
